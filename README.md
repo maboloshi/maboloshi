@@ -1,5 +1,8 @@
 ### Hi there 👋
 
+![GitHub followers](https://img.shields.io/github/followers/maboloshi?style=flat-square&logo=github&label=%E5%85%B3%E6%B3%A8%E8%80%85)
+<!--![GitHub User's stars](https://img.shields.io/github/stars/maboloshi?style=flat-square&logo=github&label=%E6%80%BB%E6%98%9F%E6%A0%87%E6%95%B0)-->
+
 <!--
 **maboloshi/maboloshi** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
