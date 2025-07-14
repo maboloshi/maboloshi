@@ -27,10 +27,10 @@ jobs:
 
       - name: Download existing data
         uses: actions/download-artifact@v4
+        continue-on-error: true
         with:
           name: stars-data
           path: stars_data/
-          if-no-artifact-found: ignore
 
       - name: Run daily tracker
         env:
