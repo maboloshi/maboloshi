@@ -38,7 +38,7 @@ jobs:
         run: node scripts/daily-stars.js
 
       - name: Upload data artifacts
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: stars-data
           path: stars_data
