@@ -30,6 +30,7 @@ jobs:
         with:
           name: stars-data
           path: stars_data/
+          if-no-artifact-found: ignore
 
       - name: Run daily tracker
         env:
