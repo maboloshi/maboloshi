@@ -42,6 +42,6 @@ jobs:
         with:
           name: stars-data
           path: |
-            stars_data/*.json
-            stars_data/backup_manifest.json
+            ./stars_data/*.json
+            ./stars_data/backup_manifest.json
           retention-days: 7
