@@ -1,0 +1,49 @@
+name: Weekly Stars Report
+
+on:
+  schedule:
+    - cron: '30 16 * * 0'  # 每周一UTC+8 时间00:30运行
+  workflow_dispatch:      # 允许手动触发
+
+jobs:
+  generate-report:
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install @octokit/rest luxon
+
+      - name: Download latest data
+        uses: actions/download-artifact@v4
+        with:
+          name: stars-data
+          path: stars_data/
+
+      - name: Generate reports
+        run: node scripts/weekly-report.js
+
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

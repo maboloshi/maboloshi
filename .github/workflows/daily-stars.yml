@@ -1,0 +1,46 @@
+name: Daily Stars Tracker
+
+on:
+  schedule:
+    - cron: '0 16 * * *'  # 每天UTC+8 时间00:00运行
+  workflow_dispatch:      # 允许手动触发
+
+jobs:
+  update-stars:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install @octokit/rest luxon
+
+      - name: Download existing data
+        uses: actions/download-artifact@v4
+        with:
+          name: stars-data
+          path: stars_data/
+
+      - name: Run daily tracker
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/daily-stars.js
+
+      - name: Upload data artifacts
+        uses: actions/upload-pages-artifact@v3
+        with:
+          name: stars-data
+          path: |
+            stars_data/*.json
+            stars_data/backup_manifest.json
+          retention-days: 7
