@@ -30,7 +30,7 @@ jobs:
         continue-on-error: true
         with:
           name: stars-data
-          path: stars_data/
+          path: stars_data
 
       - name: Run daily tracker
         env:
@@ -41,7 +41,5 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           name: stars-data
-          path: |
-            ./stars_data/*.json
-            ./stars_data/backup_manifest.json
+          path: stars_data
           retention-days: 7
